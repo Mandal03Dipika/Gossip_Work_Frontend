@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 import { io } from 'socket.io-client'
 import type { Socket } from 'socket.io-client'
-import type { IAuthContext, IUser } from '@/types/AuthTypes'
+import type { IAuthContext, IUser } from '@/types/Auth/AuthTypes'
 
 const BASE_URL = 'https://gossip.backend.wishalpha.com'
 
@@ -103,6 +103,7 @@ export const AuthContextProvider = ({
         sock.disconnect()
       }
       setIsSigningUp(false)
+      // setIsCheckingAuth(()=>false)
     })
   }
 
@@ -246,6 +247,7 @@ export const AuthContextProvider = ({
       value={{
         authUser,
         isSigningUp,
+        isVerifyingOtp,
         isLoggingIn,
         isUpdatingProfile,
         isCheckingAuth,
