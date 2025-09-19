@@ -14,6 +14,7 @@ export interface IAuthContext {
   isCheckingAuth: boolean
   onlineUsers: Array<IUser>
   onlineFriends: Array<IUser>
+  socket: Socket | null
   connectSocket: () => void
   disconnectSocket: () => void
   resetPassword: (
