@@ -16,6 +16,7 @@ export interface IAuthContext {
   onlineFriends: Array<IUser>
   connectSocket: () => void
   disconnectSocket: () => void
+  isVerifyingOtp: boolean
   resetPassword: (
     { email, newPassword }: { email: string; newPassword: string },
     callback?: (res: any) => void,
@@ -33,7 +34,7 @@ export interface IAuthContext {
     { email, otp }: { email: string; otp: string },
     callback?: () => void,
   ) => Promise<void>
-  resendOtp: (email: string, callback?: () => void) => Promise<void>
+  resendOtp: (email: string, callback?: (res: any) => void) => Promise<void>
   update: (data: any) => Promise<void>
   getOnlineFriends: () => void
 }
