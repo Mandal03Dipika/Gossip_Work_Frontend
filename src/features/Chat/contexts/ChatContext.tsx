@@ -1,4 +1,3 @@
-
 import { create } from "zustand";
 import { Socket } from "socket.io-client";
 
@@ -32,9 +31,11 @@ interface ChatState {
   groups: Group[];
   users: User[];
   requests: User[];
+  sidebarOpen: boolean;
   setSelectedUser: (user: User | null) => void;
   setSelectedGroup: (group: Group | null) => void;
   setMessages: (messages: Message[]) => void;
+  setSidebarOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
   subscribeToMessages: (socket: Socket) => void;
   subscribeToGroupMessages: (socket: Socket) => void;
 }
@@ -46,10 +47,14 @@ const useChatStore = create<ChatState>((set, get) => ({
   groups: [],
   users: [],
   requests: [],
+  sidebarOpen: false,
 
   setSelectedUser: (user) => set({ selectedUser: user }),
   setSelectedGroup: (group) => set({ selectedGroup: group }),
   setMessages: (messages) => set({ messages }),
+  setSidebarOpen: (value) => set((state) => ({ 
+    sidebarOpen: typeof value === 'function' ? value(state.sidebarOpen) : value 
+  })),
 
   subscribeToMessages: (socket) => {
     socket.off("newMessage");
