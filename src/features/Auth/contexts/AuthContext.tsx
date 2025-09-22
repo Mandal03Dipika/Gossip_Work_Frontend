@@ -251,6 +251,7 @@ export const AuthContextProvider = ({
         isCheckingAuth,
         onlineUsers,
         onlineFriends,
+        socket,
 
         connectSocket,
         disconnectSocket,
